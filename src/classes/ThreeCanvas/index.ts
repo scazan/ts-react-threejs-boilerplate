@@ -92,6 +92,7 @@ class ThreeCanvas {
 
     if (needResize) {
       renderer.setSize(width, height, false);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // use 2x pixel ratio at max
     }
 
     return needResize;
