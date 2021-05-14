@@ -18,6 +18,7 @@ class ThreeCanvas {
   private composer: THREE.Composer;
   private camera: THREE.Camera;
   private cubeGroup: THREE.Group;
+  private clock: THREE.Clock;
 
   constructor(options: IOptions) {
     const { mountPoint, width, height } = options;
@@ -25,6 +26,7 @@ class ThreeCanvas {
     // this is just here for reference. most of this file should be overwritten :)
 
     // basics
+    const clock = this.clock = new THREE.Clock();
     const scene = new THREE.Scene();
     const camera = this.camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
     const renderer = this.renderer = new THREE.WebGLRenderer({
@@ -105,6 +107,8 @@ class ThreeCanvas {
       this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
       this.camera.updateProjectionMatrix();
     }
+
+    this.cubeGroup.rotation.y = this.clock.getElapsedTime();
 
     this.composer.render();
   }
