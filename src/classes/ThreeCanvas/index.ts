@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Mesh, Vector3, MathUtils } from 'three';
+import gsap from 'gsap';
 import theme from 'utils/theme';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
