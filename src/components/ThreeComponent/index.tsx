@@ -8,7 +8,7 @@ interface IState {
 }
 
 class ThreeComponent extends React.Component<{}, IState> {
-  private visualizationEl: React.RefObject<HTMLDivElement>;
+  private threeCanvasEl: React.RefObject<HTMLDivElement>;
   static contextType = AppState;
 
   constructor(props: any) {
@@ -18,7 +18,7 @@ class ThreeComponent extends React.Component<{}, IState> {
       initialized: false,
     };
 
-    this.visualizationEl = React.createRef();
+    this.threeCanvasEl = React.createRef();
   }
 
   componentDidUpdate() {
@@ -35,9 +35,9 @@ class ThreeComponent extends React.Component<{}, IState> {
     // const appState = this.context; // access to the React Context store
 
     const threeCanvas = new ThreeCanvas({
-      mountPoint: this.visualizationEl.current,
-      width: window.innerWidth,
-      height: window.innerHeight,
+      mountPoint: this.threeCanvasEl.current,
+      width: this.threeCanvasEl.current.clientWidth,
+      height: this.threeCanvasEl.current.clientHeight,
     });
 
     // start draw loop
@@ -61,7 +61,7 @@ class ThreeComponent extends React.Component<{}, IState> {
         className="threeComponent"
         initialized={this.state.initialized}
       >
-        <div className="visualizationMount" ref={this.visualizationEl}>
+        <div className="visualizationMount" ref={this.threeCanvasEl}>
         </div>
       </StyledThreeComponent>
     );
