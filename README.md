@@ -10,6 +10,7 @@ Initially created from create-react-app and so inherits properties and conventio
 * AWS SDK
 * Basic Gitlab CI/CD config
 * WASM webpack support
+* CSS reset from [github.com/necolas/normalize.css](https://github.com/necolas/normalize.css)
 
 ## Available Scripts
 
