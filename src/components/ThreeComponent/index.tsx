@@ -43,8 +43,6 @@ class ThreeComponent extends React.Component<{}, IState> {
     // start draw loop
     this.startDrawing(threeCanvas);
     this.setState({initialized: true});
-
-    console.log('init');
   }
 
   startDrawing(threeCanvas: ThreeCanvas) {
