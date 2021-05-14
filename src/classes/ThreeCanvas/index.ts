@@ -22,6 +22,8 @@ class ThreeCanvas {
   constructor(options: IOptions) {
     const { mountPoint, width, height } = options;
 
+    // this is just here for reference. most of this file should be overwritten :)
+
     // basics
     const scene = new THREE.Scene();
     const camera = this.camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
@@ -51,7 +53,6 @@ class ThreeCanvas {
   }
 
   addMeshes(scene: THREE.Scene) {
-    // main object
     const cubeGroup = this.cubeGroup = new THREE.Group();
     const cubeInitialPositions = [
       {
