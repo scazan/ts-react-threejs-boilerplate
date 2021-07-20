@@ -1,2 +1,7 @@
-export { default as fragment } from './fragment';
-export { default as vertex } from './vertex';
+import fragment from './fragment.glsl';
+import vertex from './vertex.glsl';
+
+export default {
+  fragment,
+  vertex,
+};

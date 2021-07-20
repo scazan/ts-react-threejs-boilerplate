@@ -24,5 +24,11 @@ module.exports = function override(config, env) {
         use: [{ loader: require.resolve('wasm-loader'), options: {} }]
     });
 
+    config.module.rules.push({
+        test: /\.(glsl|vs|fs)$/,
+        exclude: /node_modules/,
+        loader: 'ts-shader-loader',
+    });
+
     return config;
 };
