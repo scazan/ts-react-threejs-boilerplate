@@ -6,6 +6,7 @@ Initially created from create-react-app and so inherits properties and conventio
 * TypeScript
 * React
 * Three.js
+* GSAP
 * Styled Components
 * AWS SDK
 * Basic Gitlab CI/CD config
