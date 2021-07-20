@@ -1,18 +1,18 @@
 import * as THREE from 'three';
 import { Mesh, Vector3, MathUtils } from 'three';
 import gsap from 'gsap';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import theme from 'utils/theme';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+import { vertex as basicVertex, fragment as basicFragment } from './shaders/basic';
 
 interface IOptions {
   mountPoint: HTMLDivElement;
   width: number;
   height: number;
 }
-
-let startTime = Date.now();
 
 class ThreeCanvas {
   private renderer: THREE.WebGLRenderer;
@@ -68,7 +68,18 @@ class ThreeCanvas {
       },
     ];
 
-    const material = new THREE.MeshBasicMaterial( { color: theme.baseFontColor } );
+    // some standard material or ShaderMaterial
+    // const material = new THREE.MeshBasicMaterial( { color: theme.baseFontColor } );
+    const material = new THREE.ShaderMaterial({
+      // transparent: true,
+      side: THREE.DoubleSide,
+      vertexShader: basicVertex,
+      fragmentShader: basicFragment,
+      uniforms: {
+        time: { value: 0 },
+      },
+    });
+
     for (let i=0; i < 2; i++) {
       const geometry= new THREE.BoxGeometry();
 
@@ -79,7 +90,8 @@ class ThreeCanvas {
       cube.position.set(cubeInitialPositions[i].position.x, cubeInitialPositions[i].position.y, cubeInitialPositions[i].position.z,);
     }
 
-    cubeGroup.position.z = -9; // push 9 meters back
+    cubeGroup.position.z = -7; // push 7 meters back
+    gsap.to(cubeGroup.rotation, {duration: 10, y: Math.PI * 2, repeat: -1, ease: "none"});
     scene.add(cubeGroup);
   }
 
@@ -109,8 +121,6 @@ class ThreeCanvas {
       this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
       this.camera.updateProjectionMatrix();
     }
-
-    this.cubeGroup.rotation.y = this.clock.getElapsedTime();
 
     this.composer.render();
   }

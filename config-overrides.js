@@ -25,9 +25,9 @@ module.exports = function override(config, env) {
     });
 
     config.module.rules.push({
-        test: /\.(glsl|vs|fs)$/,
+        test: /\.glsl/,
         exclude: /node_modules/,
-        loader: 'ts-shader-loader',
+        loader: 'raw-loader',
     });
 
     return config;
