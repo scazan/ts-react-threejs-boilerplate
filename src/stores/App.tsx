@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import NoiseSynth from 'classes/NoiseSynth';
+import MarkovN from 'markovn';
 
 export interface IAppState {
   getAudioContext: () => AudioContext;
@@ -6,6 +8,7 @@ export interface IAppState {
 };
 
 let audioCtx = null;
+let synth = null;
 export const defaultState: IAppState = {
   getAudioContext: () => {
     if (audioCtx === null) {
@@ -14,6 +17,20 @@ export const defaultState: IAppState = {
         latencyHint: "playback",
         sampleRate: 44100,
       });
+
+      synth = new NoiseSynth({ audioContext: audioCtx });
+      synth.setFrequency(100);
+      synth.setMasterVolume(0.5);
+
+      const markov = new MarkovN([200, 300, 200, 500, 600, 200, 300], 2);
+      const pattern = markov.asPattern([200, 300, 200]);
+
+      // setInterval(() => {
+        // synth.setFrequency(pattern.next().value * 0.75);
+      // }, 250);
+
+
+
     }
 
     return audioCtx;

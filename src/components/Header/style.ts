@@ -5,4 +5,5 @@ interface IProps {
 }
 
 export default styled.div<IProps>`
+  display: block;
 `;

@@ -5,11 +5,15 @@ import { useState as useAppState } from 'stores/App';
 const Header: React.FC = () => {
   const appState = useAppState();
 
+  const startSynth = () => {
+    appState.getAudioContext();
+  }
+
   return (
     <StyledHeader
       className="header"
     >
-      <h1 className="title">hello</h1>
+      <button onClick={startSynth}>start</button>
     </StyledHeader>
   );
 };
